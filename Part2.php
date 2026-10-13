@@ -4,18 +4,17 @@ $username = "root";
 $password = "Pass4!";
 $dbname = "tennisclub";
 
-//set the default timezone - this is necessary since MySQL 8. This is an effort to store all dates and times together with their timezones.
-//This is particularly important where there is a timestamp indicating when something happened.
 date_default_timezone_set('Europe/Dublin');
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname, $port);
-// Check connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "INSERT INTO member (firstname, surname) VALUES ('john', 'doe')";
+$firstname = $_POST['firstname'];
+$surname = $_POST['surname'];
+
+$sql = "INSERT INTO member (firstname, surname) VALUES ('$firstname', '$surname')";
 
 mysqli_query($conn, $sql);
 
