@@ -11,7 +11,17 @@ if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "INSERT INTO member (firstname, surname) VALUES ('john', 'doe')";
+$sql = "SELECT id, firstname, surname FROM member";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+  // Output data of each row
+  while($row = mysqli_fetch_assoc($result)) {
+    echo "id: " . $row["id"] . " - Name: " . $row["firstname"] . " " . $row["surname"] . ", ";
+  }
+} else {
+  echo "0 results";
+}
 
 mysqli_query($conn, $sql);
 
